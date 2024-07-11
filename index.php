@@ -1,3 +1,49 @@
 <?php
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
+error_reporting(E_ALL);
 
 require_once('vendor/autoload.php');
+
+$client = new GuzzleHttp\Client();
+$headers = [
+    'Accept' => 'application/json, text/plain, */*',
+    'Accept-Language' => 'lt-LT,lt;q=0.9,en-US;q=0.8,en;q=0.7,ru;q=0.6,pl;q=0.5,no;q=0.4',
+    'Connection' => 'keep-alive',
+    'Cookie' => 'TS01824138=01701735f1ebe336e34a416c1691e0680326e56f5f9b5a6bb841a302954cc4d5d9ae65421827d45ec67615124d0ad1adfdec5b9414; TS01824138=01701735f1ed9d270b05b52c263cc12bca64d2b605f2e9ab3233304eb764f1ce46b07e49ad5305d024b3fb84ad4f80e300ba8424d0',
+    'Referer' => 'https://ipr.esveikata.lt/?municipality=7&organization=1000098867',
+    'Sec-Fetch-Dest' => 'empty',
+    'Sec-Fetch-Mode' => 'cors',
+    'Sec-Fetch-Site' => 'same-origin',
+    'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
+    'sec-ch-ua' => '"Not/A)Brand";v="8", "Chromium";v="126", "Google Chrome";v="126"',
+    'sec-ch-ua-mobile' => '?0',
+    'sec-ch-ua-platform' => '"Windows"'
+];
+$request = $client->request('GET', 'https://ipr.esveikata.lt/api/searches/appointments/times?municipalityId=7&organizationId=1000098867&specialistId=1000106506&page=0&size=50', $headers);
+$response = json_decode($request->getBody());
+
+sendMessage();
+
+if(count($response->data) > 0){
+
+}
+
+function sendMessage()
+{
+    $sid = "AC13630a3d16e9a2fd60047d55b390d8eb";
+    $token = "565d785114d4c9129333b93596222d14";
+    $client = new Twilio\Rest\Client($sid, $token);
+
+// Use the Client to make requests to the Twilio REST API
+    $client->messages->create(
+    // The number you'd like to send the message to
+        '+37060677666',
+        [
+            // A Twilio phone number you purchased at https://console.twilio.com
+            'from' => '+19452921335',
+            // The body of the text message you'd like to send
+            'body' => "Hey Jenny! Good luck on the bar exam!"
+        ]
+    );
+}
