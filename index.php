@@ -1,4 +1,5 @@
 <?php
+const CACHE_FILE_NAME = 'cache.txt';
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
@@ -20,30 +21,38 @@ $headers = [
     'sec-ch-ua-mobile' => '?0',
     'sec-ch-ua-platform' => '"Windows"'
 ];
-$request = $client->request('GET', 'https://ipr.esveikata.lt/api/searches/appointments/times?municipalityId=7&organizationId=1000098867&specialistId=1000106506&page=0&size=50', $headers);
+
+$url = 'https://ipr.esveikata.lt/api/searches/appointments/times?municipalityId=7&organizationId=1000098867&specialistId=1000106506&page=0&size=50';
+
+
+$request = $client->request('GET', $url, $headers);
 $response = json_decode($request->getBody());
 
-sendMessage();
+$hash = md5(json_encode($response->data));
+$cacheHash = file_get_contents(CACHE_FILE_NAME);
 
-if(count($response->data) > 0){
-
+if (isset($_GET['test'])) {
+    $cacheHash = 'test';
+    $response->data = [1, 2];
 }
 
-function sendMessage()
+if ($hash !== $cacheHash && count($response->data) > 0) {
+    file_put_contents(CACHE_FILE_NAME, $hash);
+    sendMessage('whatsapp:+37060677666');
+    // sendMessage('whatsapp:+37062060860');
+}
+
+function sendMessage(string $to)
 {
     $sid = "AC13630a3d16e9a2fd60047d55b390d8eb";
     $token = "565d785114d4c9129333b93596222d14";
     $client = new Twilio\Rest\Client($sid, $token);
 
-// Use the Client to make requests to the Twilio REST API
     $client->messages->create(
-    // The number you'd like to send the message to
-        '+37060677666',
+        $to,
         [
-            // A Twilio phone number you purchased at https://console.twilio.com
-            'from' => '+19452921335',
-            // The body of the text message you'd like to send
-            'body' => "Hey Jenny! Good luck on the bar exam!"
+            'from' => 'whatsapp:+14155238886',
+            'body' => "Yra laisvu laiku Rojui pas gyditoja: https://ipr.esveikata.lt/?municipality=7&organization=1000098867"
         ]
     );
 }
