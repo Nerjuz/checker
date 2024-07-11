@@ -1,0 +1,9 @@
+{
+    "name": "nzutautas/checker",
+    "autoload": {
+        "psr-4": {
+            "Nzutautas\\Checker\\": "src/"
+        }
+    },
+    "require": {}
+}
