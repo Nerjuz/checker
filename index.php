@@ -41,7 +41,7 @@ if (isset($_GET['test'])) {
 if ($hash !== $cacheHash && count($response->data) > 0) {
     file_put_contents(CACHE_FILE_NAME, $hash);
 
-    mail('nerjuz@gmail.com', 'Vejo dermatologas', date('Y-m-d H:i:s') . ' shttps://ipr.esveikata.lt/');
+    mail('nerjuz@gmail.com', 'Vejo dermatologas', date('Y-m-d H:i:s') . ' Yra laisvu laiku Rojui pas gyditoja: https://ipr.esveikata.lt/?municipality=7&organization=1000099076&professionCode=221210');
     //sendMessage('whatsapp:+37060677666');
     // sendMessage('whatsapp:+37062060860');
 }
