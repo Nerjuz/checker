@@ -22,7 +22,8 @@ $headers = [
     'sec-ch-ua-platform' => '"Windows"'
 ];
 
-$url = 'https://ipr.esveikata.lt/api/searches/appointments/times?municipalityId=7&organizationId=1000098867&specialistId=1000106506&page=0&size=50';
+//$url = 'https://ipr.esveikata.lt/api/searches/appointments/times?municipalityId=7&organizationId=1000098867&specialistId=1000106506&page=0&size=50';
+$url = 'https://ipr.esveikata.lt/api/searches/appointments/times?municipalityId=7&organizationId=1000099076&professionCode=221210&page=0&size=50';
 
 
 $request = $client->request('GET', $url, $headers);
