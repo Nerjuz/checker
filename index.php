@@ -1,4 +1,5 @@
 <?php
+
 const CACHE_FILE_NAME = 'cache.txt';
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
@@ -39,7 +40,9 @@ if (isset($_GET['test'])) {
 
 if ($hash !== $cacheHash && count($response->data) > 0) {
     file_put_contents(CACHE_FILE_NAME, $hash);
-    sendMessage('whatsapp:+37060677666');
+
+    mail('nerjuz@gmail.com', 'Vejo dermatologas', date('Y-m-d H:i:s') . ' shttps://ipr.esveikata.lt/');
+    //sendMessage('whatsapp:+37060677666');
     // sendMessage('whatsapp:+37062060860');
 }
 
