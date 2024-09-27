@@ -4,6 +4,7 @@ const CACHE_FILE_NAME = 'cache.txt';
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
+date_default_timezone_set('Europe/Vilnius');
 
 require_once('vendor/autoload.php');
 
@@ -24,8 +25,8 @@ $headers = [
 ];
 
 //$url = 'https://ipr.esveikata.lt/api/searches/appointments/times?municipalityId=7&organizationId=1000098867&specialistId=1000106506&page=0&size=50';
-//$url = 'https://ipr.esveikata.lt/api/searches/appointments/times?municipalityId=7&organizationId=1000099076&professionCode=221210&page=0&size=50';
-$url = 'https://ipr.esveikata.lt/api/searches/appointments/times?municipalityId=7&professionCode=221210&page=0&size=50';
+$url = 'https://ipr.esveikata.lt/api/searches/appointments/times?municipalityId=7&organizationId=1000099076&professionCode=221210&page=0&size=50';
+//$url = 'https://ipr.esveikata.lt/api/searches/appointments/times?municipalityId=7&professionCode=221210&page=0&size=50';
 
 
 $request = $client->request('GET', $url, $headers);
