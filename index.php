@@ -24,7 +24,8 @@ $headers = [
 ];
 
 //$url = 'https://ipr.esveikata.lt/api/searches/appointments/times?municipalityId=7&organizationId=1000098867&specialistId=1000106506&page=0&size=50';
-$url = 'https://ipr.esveikata.lt/api/searches/appointments/times?municipalityId=7&organizationId=1000099076&professionCode=221210&page=0&size=50';
+//$url = 'https://ipr.esveikata.lt/api/searches/appointments/times?municipalityId=7&organizationId=1000099076&professionCode=221210&page=0&size=50';
+$url = 'https://ipr.esveikata.lt/api/searches/appointments/times?municipalityId=7&professionCode=221210&page=0&size=50';
 
 
 $request = $client->request('GET', $url, $headers);
@@ -41,7 +42,7 @@ if (isset($_GET['test'])) {
 if ($hash !== $cacheHash && count($response->data) > 0) {
     file_put_contents(CACHE_FILE_NAME, $hash);
 
-    mail('nerjuz@gmail.com', 'Vejo dermatologas', date('Y-m-d H:i:s') . ' Yra laisvu laiku Rojui pas gyditoja: https://ipr.esveikata.lt/?municipality=7&organization=1000099076&professionCode=221210');
+    mail('nerjuz@gmail.com', 'Vejo dermatologas ['.date('Y-m-d H:i:s').']', date('Y-m-d H:i:s') . ' Yra laisvu laiku Vejui pas gyditoja: https://ipr.esveikata.lt/?municipality=7&organization=1000099076&professionCode=221210');
     //sendMessage('whatsapp:+37060677666');
     // sendMessage('whatsapp:+37062060860');
 }
